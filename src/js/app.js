@@ -21,13 +21,13 @@ App = {
   },
 
   initContract: function() {
-    $.getJSON('TutorialToken.json', function(data) {
+    $.getJSON('TodaToken.json', function(data) {
       // Get the necessary contract artifact file and instantiate it with truffle-contract.
-      var TutorialTokenArtifact = data;
-      App.contracts.TutorialToken = TruffleContract(TutorialTokenArtifact);
+      var TodaTokenArtifact = data;
+      App.contracts.TodaToken = TruffleContract(TodaTokenArtifact);
 
       // Set the provider for our contract.
-      App.contracts.TutorialToken.setProvider(App.web3Provider);
+      App.contracts.TodaToken.setProvider(App.web3Provider);
 
       // Use our contract to retieve and mark the adopted pets.
       return App.getBalances();
@@ -48,7 +48,7 @@ App = {
 
     console.log('Transfer ' + amount + ' TT to ' + toAddress);
 
-    var tutorialTokenInstance;
+    var TodaTokenInstance;
 
     web3.eth.getAccounts(function(error, accounts) {
       if (error) {
@@ -57,10 +57,10 @@ App = {
 
       var account = accounts[0];
 
-      App.contracts.TutorialToken.deployed().then(function(instance) {
-        tutorialTokenInstance = instance;
+      App.contracts.TodaToken.deployed().then(function(instance) {
+        TodaTokenInstance = instance;
 
-        return tutorialTokenInstance.transfer(toAddress, amount, {from: account});
+        return TodaTokenInstance.transfer(toAddress, amount, {from: account});
       }).then(function(result) {
         alert('Transfer Successful!');
         return App.getBalances();
@@ -73,7 +73,7 @@ App = {
   getBalances: function() {
     console.log('Getting balances...');
 
-    var tutorialTokenInstance;
+    var TodaTokenInstance;
 
     web3.eth.getAccounts(function(error, accounts) {
       if (error) {
@@ -82,10 +82,10 @@ App = {
 
       var account = accounts[0];
 
-      App.contracts.TutorialToken.deployed().then(function(instance) {
-        tutorialTokenInstance = instance;
+      App.contracts.TodaToken.deployed().then(function(instance) {
+        TodaTokenInstance = instance;
 
-        return tutorialTokenInstance.balanceOf(account);
+        return TodaTokenInstance.balanceOf(account);
       }).then(function(result) {
         balance = result.c[0];
 
